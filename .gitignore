@@ -1,0 +1,5 @@
+# large release assets — uploaded as GitHub Release attachments, not git objects
+*.tar.xz
+*.tar
+*.img
+*.dd

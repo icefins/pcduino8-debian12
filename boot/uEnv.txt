@@ -1,0 +1,19 @@
+baudrate=115200
+boot_normal=fatload mmc 0:2 40007800 ${kernel};bootm 40007800
+load_env=if run loadbootenv; then env import -t ${scriptaddr} ${filesize};fi
+loadbootenv=fatload mmc 0:2 $scriptaddr ${bootenv}
+bootenv=uEnv.txt
+scriptaddr=0x44000000
+filesize=4096
+kernel=uImage
+bootcmd=run load_env setargs_mmc boot_normal
+bootdelay=1
+console=ttyS0,115200 console=tty1
+init=/init
+loglevel=8
+mmc_root=/dev/mmcblk0p3
+setargs_mmc=setenv bootargs console=${console} root=${mmc_root} init=${init}
+loglevel=${loglevel}; fatload mmc 0:2 0x43000000 script.bin
+stderr=serial
+stdin=serial
+stdout=serial
